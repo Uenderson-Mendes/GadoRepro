@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reprovaca/pages/alertas_vacas.dart';
+import 'package:reprovaca/models/list_prenha.dart';
 import 'package:reprovaca/pages/list_vacas.dart';
 import 'package:reprovaca/pages/add_vacas.dart';
 import 'forms/bezerro.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         '/listBezerro': (context) => ListBezerro(),
         '/listrepro': (context) => ListRepro(),
         '/vacaprenha': (context) => PrenhaAdd(),
+        '/listPrenha': (context) => ListPrenhaPage(),
 
       },
     );
