@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import '../forms/login_page.dart';
 import '../components/hamburguer_botton.dart';
 
 class ListVacs extends StatefulWidget {
@@ -10,11 +10,12 @@ class ListVacs extends StatefulWidget {
 }
 
 class _ListVacsState extends State<ListVacs> {
-   int _selectedIndex = 0;
+  int _selectedIndex = 0;
   List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> vacas = [];
   final apiUrl = 'http://10.0.0.122:8000/vacas/';
+  int? userId;
 
   @override
   void initState() {
@@ -23,13 +24,22 @@ class _ListVacsState extends State<ListVacs> {
   }
 
   Future<void> fetchVacas() async {
+    userId = LoginPage.userId;
+
     try {
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
-        List<dynamic> data = json.decode(response.body);
+        List<Map<String, dynamic>> data =
+            List<Map<String, dynamic>>.from(json.decode(response.body));
+
+        // Filter vacas by "usuario" field
+        List<Map<String, dynamic>> filteredVacas = data
+            .where((vaca) => vaca['usuario'].toString() == userId.toString())
+            .toList();
+
         setState(() {
-          vacas = data.cast<Map<String, dynamic>>();
+          vacas = filteredVacas;
         });
       } else {
         showDialog(
@@ -113,73 +123,72 @@ class _ListVacsState extends State<ListVacs> {
         TextEditingController origemController = TextEditingController(text: vaca['origem'] ?? '');
         TextEditingController dataNascimentoController = TextEditingController(text: vaca['data_nascimento'] ?? '');
         TextEditingController statuController = TextEditingController(text: vaca['statu'] ?? '');
-
-        TextEditingController usuarioController =
-           TextEditingController(text: vaca['usuario'].toString());
-
-      
+        TextEditingController usuarioController = TextEditingController(text: vaca['usuario'].toString());
 
         return AlertDialog(
           title: const Text('Editar Vaca'),
           content: SingleChildScrollView(
             child: Column(
-             children: [
-        TextFormField(
-          controller: nomeController,
-          decoration: InputDecoration(labelText: 'Nome'),
-        ),
-        TextFormField(
-          controller: racaController,
-          decoration: InputDecoration(labelText: 'Raça'),
-        ),
-        TextFormField(
-          controller: loteController,
-          decoration: InputDecoration(labelText: 'Lote'),
-        ),
-        TextFormField(
-          controller: numeroController,
-          decoration: InputDecoration(labelText: 'Número'),
-        ),
-        TextFormField(
-          controller: origemController,
-          decoration: InputDecoration(labelText: 'Origem'),
-        ),
-        TextFormField(
-          controller: dataNascimentoController,
-          decoration: InputDecoration(labelText: 'Data de Nascimento'),
-        ),
-        DropdownButtonFormField<String>(
-          value: statuController.text,
-          decoration: InputDecoration(labelText: 'Status'),
-          items: [
-            DropdownMenuItem<String>(
-              value: 'parida',
-              child: Text('Parida'),
+              children: [
+                TextFormField(
+                  controller: nomeController,
+                  decoration: InputDecoration(labelText: 'Nome'),
+                ),
+                TextFormField(
+                  controller: racaController,
+                  decoration: InputDecoration(labelText: 'Raça'),
+                ),
+                TextFormField(
+                  controller: loteController,
+                  decoration: InputDecoration(labelText: 'Lote'),
+                ),
+                TextFormField(
+                  controller: numeroController,
+                  decoration: InputDecoration(labelText: 'Número'),
+                ),
+                TextFormField(
+                  controller: origemController,
+                  decoration: InputDecoration(labelText: 'Origem'),
+                ),
+                TextFormField(
+                  controller: dataNascimentoController,
+                  decoration: InputDecoration(labelText: 'Data de Nascimento'),
+                ),
+                DropdownButtonFormField<String>(
+                  value: statuController.text,
+                  decoration: InputDecoration(labelText: 'Status'),
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: 'parida',
+                      child: Text('Parida'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'solteira',
+                      child: Text('Solteira'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'no_cio',
+                      child: Text('No cio'),
+                    ),
+                    DropdownMenuItem<String>(
+                      value: 'inseminada',
+                      child: Text('Inseminada'),
+                    ),
+                       DropdownMenuItem<String>(
+                      value: 'prenha',
+                      child: Text('Prenha'),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    statuController.text = value!;
+                  },
+                ),
+                TextFormField(
+                  controller: usuarioController,
+                  decoration: InputDecoration(labelText: 'Usuário'),
+                ),
+              ],
             ),
-            DropdownMenuItem<String>(
-              value: 'solteira',
-              child: Text('Solteira'),
-            ),
-            DropdownMenuItem<String>(
-              value: 'no_cio',
-              child: Text('No cio'),
-            ),
-            DropdownMenuItem<String>(
-              value: 'inseminada',
-              child: Text('Inseminada'),
-            ),
-          ],
-          onChanged: (value) {
-            statuController.text = value!;
-          },
-        ),
-        TextFormField(
-          controller: usuarioController,
-          decoration: InputDecoration(labelText: 'Usuário'),
-        ),
-      ],
-            ),
-            
           ),
           actions: [
             ElevatedButton(
@@ -196,16 +205,14 @@ class _ListVacsState extends State<ListVacs> {
                   };
 
                   Map<String, dynamic> requestBody = {
-                     'nome_vaca': nomeController.text,
-        'raca': racaController.text,
-        'lote': loteController.text,
-        'numero_v': numeroController.text,
-        'origem': origemController.text,
-        'data_nascimento': dataNascimentoController.text,
-        'statu': statuController.text,
-        'usuario': usuarioController.text,
-
-                    
+                    'nome_vaca': nomeController.text,
+                    'raca': racaController.text,
+                    'lote': loteController.text,
+                    'numero_v': numeroController.text,
+                    'origem': origemController.text,
+                    'data_nascimento': dataNascimentoController.text,
+                    'statu': statuController.text,
+                    'usuario': usuarioController.text,
                   };
 
                   final response = await http.put(
@@ -222,8 +229,7 @@ class _ListVacsState extends State<ListVacs> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Sucesso'),
-                          content:
-                              const Text('Vaca atualizada com sucesso.'),
+                          content: const Text('Vaca atualizada com sucesso.'),
                           actions: [
                             ElevatedButton(
                               onPressed: () {
@@ -241,8 +247,7 @@ class _ListVacsState extends State<ListVacs> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Erro'),
-                          content:
-                              const Text('Ocorreu um erro ao editar a vaca.'),
+                          content: const Text('Ocorreu um erro ao editar a vaca.'),
                           actions: [
                             ElevatedButton(
                               onPressed: () {
@@ -265,90 +270,89 @@ class _ListVacsState extends State<ListVacs> {
         );
       },
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 3, 52, 23),
-        title: Text('Listas Vacas'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: vacas.length,
-          itemBuilder: (BuildContext context, int index) {
-          return Container(
-           
-  margin: EdgeInsets.only(bottom: 10),
-  child: Card(
-    color: Color.fromARGB(255, 231, 228, 228),
-    elevation: 3,
-    child: ListTile(
-      
-      title: Text(vacas[index]['nome_vaca']),
-      subtitle: Column(
-        
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          
-          Text('Raça: ${vacas[index]['raca']}'),
-          Text('Número: ${vacas[index]['numero_v']}'),
-          Text('Origem: ${vacas[index]['origem']}'),
-          Text('Status: ${vacas[index]['statu'] ?? 'N/A'}'),
-        ],
-      ),
-      trailing: Wrap(
-        runSpacing: 8,
-        children: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              editarVaca(vacas[index]);
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Confirmar'),
-                    content: const Text('Deseja excluir esta vaca?'),
-                    actions: [
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Cancelar'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          excluirVaca(vacas[index]['id'] as int);
-
-                        },
-                        child: const Text('Excluir'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
-      ),
+  }@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Color.fromARGB(255, 3, 52, 23),
+      title: Text('Listas Vacas'),
     ),
-  ),
-);
+    body: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: vacas.isEmpty
+          ? Center(
+              child: Text(
+                'Não há vacas disponíveis.',
+                style: TextStyle(fontSize: 18),
+              ),
+            )
+          : ListView.builder(
+              itemCount: vacas.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Card(
+                    color: Color.fromARGB(255, 231, 228, 228),
+                    elevation: 3,
+                    child: ListTile(
+                      title: Text(vacas[index]['nome_vaca']),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Raça: ${vacas[index]['raca']}'),
+                          Text('Número: ${vacas[index]['numero_v']}'),
+                          Text('Origem: ${vacas[index]['origem']}'),
+                          Text('Status: ${vacas[index]['statu'] ?? 'N/A'}'),
+                        ],
+                      ),
+                      trailing: Wrap(
+                        runSpacing: 8,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Color.fromARGB(255, 7, 87, 167), size: 35),
+                            onPressed: () {
+                              editarVaca(vacas[index]);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0), size: 35),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Confirmar'),
+                                    content: const Text('Deseja excluir esta vaca?'),
+                                    actions: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancelar'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          excluirVaca(vacas[index]['id'] as int);
+                                        },
+                                        child: const Text('Excluir'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+    ),
+  
 
-
-          },
-        ),
-      ),
-      
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomBarItems,
         currentIndex: _selectedIndex,
@@ -380,6 +384,3 @@ class _ListVacsState extends State<ListVacs> {
     });
   }
 }
-
-
-

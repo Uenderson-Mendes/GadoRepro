@@ -10,6 +10,7 @@ import 'package:reprovaca/forms/creat_cadstro.dart';
 import 'package:reprovaca/pages/list_bezerro.dart';
 import 'package:reprovaca/pages/list_bezerro.dart';
 import 'package:reprovaca/pages/list_reprodutor.dart';
+import 'package:reprovaca/forms/prenha.dart';
 
 import 'forms/vaca.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         '/addVacas': (context) => VacasAdd(),
         '/listBezerro': (context) => ListBezerro(),
         '/listrepro': (context) => ListRepro(),
+        '/vacaprenha': (context) => PrenhaAdd(),
 
       },
     );
@@ -100,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       SizedBox(height: 16),
       Text(
-        'ReproGado',
+        'ReproVaca',
         style: TextStyle(
           color: const Color.fromARGB(255, 0, 0, 0),
           fontSize: 30,

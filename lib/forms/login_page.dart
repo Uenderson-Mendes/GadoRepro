@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
-  static String nome = ''; // Variável 'nome' agora é estática
+  static String cpf = '';
+  static int? userId; // Variável para armazenar o ID do usuário
 
   const LoginPage({Key? key}) : super(key: key);
 
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
-  TextEditingController _nomeController = TextEditingController();
+  TextEditingController _cpfController = TextEditingController();
   TextEditingController _senhaController = TextEditingController();
 
   Future<void> _performLogin() async {
@@ -21,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       return; // Check if the widget is still mounted
     }
 
-    String nome = _nomeController.text.trim();
+    String cpf = _cpfController.text.trim();
     String senha = _senhaController.text.trim();
 
     // Replace 'http://192.168.66.32:8000' with the appropriate API URL
@@ -33,8 +34,9 @@ class _LoginPageState extends State<LoginPage> {
       bool isAuthenticated = false;
 
       for (var user in users) {
-        if (user['nome'] == nome && user['senha'] == senha) {
+        if (user['cpf'] == cpf && user['senha'] == senha) {
           isAuthenticated = true;
+          LoginPage.userId = user['id']; // Armazena o ID do usuário na variável userId
           break;
         }
       }
@@ -50,8 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
 
-        LoginPage.nome = nome; // Atribui o valor de 'nome' à variável estática na classe LoginPage
-
+        LoginPage.cpf = cpf; // Atribui o valor de 'nome' à variável estática na classe LoginPage
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         showDialog(
@@ -136,9 +137,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 70.0),
               TextFormField(
-                controller: _nomeController,
+                controller: _cpfController,
                 decoration: InputDecoration(
-                  labelText: 'Nome',
+                  labelText: 'CPF',
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(

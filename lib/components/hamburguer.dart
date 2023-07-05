@@ -5,7 +5,9 @@ import 'package:reprovaca/pages/list_vacas.dart';
 import 'package:reprovaca/main.dart';
 
 import '../forms/login_page.dart';
-String nome = LoginPage.nome; 
+String cpf = LoginPage.cpf;
+ 
+int? userId = LoginPage.userId;
 class HamburgerMenu extends StatelessWidget {
    const HamburgerMenu({Key? key}) : super(key: key);
 
@@ -61,7 +63,7 @@ class HamburgerMenu extends StatelessWidget {
                                   top: 98.0, right: 20.0),
                               child: Flexible(
                                 child: Text(
-                                  '${LoginPage.nome}',
+                                  '${LoginPage.userId}',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,

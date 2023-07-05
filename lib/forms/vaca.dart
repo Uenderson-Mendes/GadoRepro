@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:date_field/date_field.dart';
 import 'package:intl/intl.dart';
 import 'package:reprovaca/forms/login_page.dart';
+import 'login_page.dart';
+int? userId = LoginPage.userId;
 
 class VacasAdd extends StatefulWidget {
   @override
@@ -35,6 +37,10 @@ class _VacasAddState extends State<VacasAdd> {
     {
       "value": "inseminada",
       "display_name": "Inseminada",
+    },
+       {
+      "value": "prenha",
+      "display_name": "Prenha",
     },
   ];
 
@@ -70,7 +76,7 @@ class _VacasAddState extends State<VacasAdd> {
       'origem': origemController.text,
       'data_nascimento': formattedDate,
       'statu': selectedStatus,
-      'usuario': nome,
+      'usuario': userId.toString(),
     };
 
     try {
@@ -80,24 +86,28 @@ class _VacasAddState extends State<VacasAdd> {
         body: json.encode(vacaData),
       );
 
-      if (response.statusCode == 201) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Sucesso'),
-              content: const Text('Vaca adicionada com sucesso.'),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/list');
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
+     if (response.statusCode == 201) {
+        if (selectedStatus == "prenha") {
+          Navigator.pushReplacementNamed(context, '/vacaprenha');
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Sucesso'),
+                content: const Text('Vaca adicionada com sucesso.'),
+                actions: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/list');
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       } else {
         showDialog(
           context: context,
@@ -199,10 +209,7 @@ class _VacasAddState extends State<VacasAdd> {
                   labelText: 'Status',
                 ),
               ),
-              TextField(
-                controller: usuarioController,
-                decoration: InputDecoration(labelText: 'Usuário'),
-              ),
+             
               SizedBox(height: 16.0),
               Center(
                 child: ElevatedButton(

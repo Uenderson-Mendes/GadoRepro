@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
-
+import 'login_page.dart';
+int? userId = LoginPage.userId;
 class AddRepro extends StatefulWidget {
   @override
   _AddReproState createState() => _AddReproState();
@@ -32,7 +33,7 @@ class _AddReproState extends State<AddRepro> {
       'lote': loteController.text,
       'origem': origemController.text,
       'data_nascimento': formattedDate,
-      'usuario': usuarioController.text,
+      'usuario': userId.toString(),
     };
 
     try {
@@ -129,10 +130,7 @@ class _AddReproState extends State<AddRepro> {
                 controller: origemController,
                 decoration: InputDecoration(labelText: 'Origem'),
               ),
-              TextField(
-                controller: usuarioController,
-                decoration: InputDecoration(labelText: 'Usuário'),
-              ),
+            
               SizedBox(height: 16.0),
               Center(
                 child: ElevatedButton(

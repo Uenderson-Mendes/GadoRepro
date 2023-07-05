@@ -6,7 +6,7 @@ import 'pages/alertas_vacas.dart';
 import 'pages/add_vacas.dart';
 import 'components/hamburguer_botton.dart';
 import 'package:reprovaca/components/desh.dart';
-import 'package:reprovaca/pages/list_bezerro.dart';
+
 
 
 const Color darkBlue = Color.fromARGB(255, 4, 78, 43);

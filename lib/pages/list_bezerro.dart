@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../components/hamburguer_botton.dart';
+import '../forms/login_page.dart';
 
 class ListBezerro extends StatefulWidget {
   @override
@@ -11,14 +11,17 @@ class ListBezerro extends StatefulWidget {
 
 class _ListBezerroState extends State<ListBezerro> {
   int _selectedIndex = 0;
-  List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
+  List<BottomNavigationBarItem> _bottomBarItems =
+      BottomNavigationItems.getItems();
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> bezerros = [];
   final apiUrl = 'http://10.0.0.122:8000/bezerros/';
+  int? userId;
 
   @override
   void initState() {
     super.initState();
+    userId = LoginPage.userId;
     fetchBezerros();
   }
 
@@ -27,9 +30,17 @@ class _ListBezerroState extends State<ListBezerro> {
       final response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
-        List<dynamic> data = json.decode(response.body);
+        List<Map<String, dynamic>> data =
+            List<Map<String, dynamic>>.from(json.decode(response.body));
+
+        // Filter bezerros by "usuario" field
+        List<Map<String, dynamic>> filteredBezerros = data
+            .where(
+                (bezerro) => bezerro['usuario'].toString() == userId.toString())
+            .toList();
+
         setState(() {
-          bezerros = data.cast<Map<String, dynamic>>();
+          bezerros = filteredBezerros;
         });
       } else {
         showDialog(
@@ -102,55 +113,59 @@ class _ListBezerroState extends State<ListBezerro> {
     }
   }
 
-  void editarBezerro(Map<String, dynamic> bezerro) {
+  Future<void> editarBezerro(Map<String, dynamic> bezerro) async {
+    TextEditingController nome_bezerroController = TextEditingController();
+    TextEditingController numero_bController = TextEditingController();
+    TextEditingController racaController = TextEditingController();
+    TextEditingController loteController = TextEditingController();
+    TextEditingController origemController = TextEditingController();
+    TextEditingController data_nascimentoController = TextEditingController();
+
+    nome_bezerroController.text = bezerro['nome_bezerro'] ?? '';
+    numero_bController.text = bezerro['numero_b'] ?? '';
+    racaController.text = bezerro['raca'] ?? '';
+    loteController.text = bezerro['lote'] ?? '';
+    origemController.text = bezerro['origem'] ?? '';
+    data_nascimentoController.text = bezerro['data_nascimento'] ?? '';
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        TextEditingController nome_bezerroController = TextEditingController(text: bezerro['nome_bezerro'] ?? '');
-        TextEditingController numero_bController = TextEditingController(text: bezerro['numero_b'] ?? '');
-        TextEditingController racaController = TextEditingController(text: bezerro['raca'] ?? '');
-        TextEditingController loteController = TextEditingController(text: bezerro['lote'] ?? '');
-        TextEditingController origemController = TextEditingController(text: bezerro['origem'] ?? '');
-        TextEditingController dataNascimentoController = TextEditingController(text: bezerro['data_nascimento'] ?? '');
-        TextEditingController usuarioController = TextEditingController(text: bezerro['usuario'].toString());
-
         return AlertDialog(
           title: const Text('Editar Bezerro'),
           content: SingleChildScrollView(
             child: Column(
-              children: [
-                TextFormField(
+              children: <Widget>[
+                TextField(
                   controller: nome_bezerroController,
-                  decoration: InputDecoration(labelText: 'Nome'),
+                  decoration:
+                      const InputDecoration(labelText: 'Nome do Bezerro'),
                 ),
-                TextFormField(
+                TextField(
                   controller: numero_bController,
-                  decoration: InputDecoration(labelText: 'Número'),
+                  decoration: const InputDecoration(labelText: 'Número B'),
                 ),
-                TextFormField(
+                TextField(
                   controller: racaController,
-                  decoration: InputDecoration(labelText: 'Raça'),
+                  decoration: const InputDecoration(labelText: 'Raça'),
                 ),
-                TextFormField(
+                TextField(
                   controller: loteController,
-                  decoration: InputDecoration(labelText: 'Lote'),
+                  decoration: const InputDecoration(labelText: 'Lote'),
                 ),
-                TextFormField(
+                TextField(
                   controller: origemController,
-                  decoration: InputDecoration(labelText: 'Origem'),
+                  decoration: const InputDecoration(labelText: 'Origem'),
                 ),
-                TextFormField(
-                  controller: dataNascimentoController,
-                  decoration: InputDecoration(labelText: 'Data de Nascimento'),
-                ),
-                TextFormField(
-                  controller: usuarioController,
-                  decoration: InputDecoration(labelText: 'Usuário'),
+                TextField(
+                  controller: data_nascimentoController,
+                  decoration:
+                      const InputDecoration(labelText: 'Data de Nascimento'),
                 ),
               ],
             ),
           ),
-          actions: [
+          actions: <Widget>[
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -159,69 +174,63 @@ class _ListBezerroState extends State<ListBezerro> {
             ),
             ElevatedButton(
               onPressed: () async {
-                try {
-                  Map<String, String> headers = {
-                    'Content-Type': 'application/json',
-                  };
+                // Save the changes
+                bezerro['nome_bezerro'] = nome_bezerroController.text;
+                bezerro['numero_b'] = numero_bController.text;
+                bezerro['raca'] = racaController.text;
+                bezerro['lote'] = loteController.text;
+                bezerro['origem'] = origemController.text;
+                bezerro['data_nascimento'] = data_nascimentoController.text;
+                bezerro['usuario'] = userId
+                    .toString(); // Atribuir o usuário presente em userId
 
-                  Map<String, dynamic> requestBody = {
-                    'nome_bezerro': nome_bezerroController.text,
-                    'numero_b': numero_bController.text,
-                    'raca': racaController.text,
-                    'lote': loteController.text,
-                    'origem': origemController.text,
-                    'data_nascimento': dataNascimentoController.text,
-                    'usuario': usuarioController.text,
-                  };
+                final response = await http.put(
+                  Uri.parse('$apiUrl${bezerro['id']}/'),
+                  body: json.encode(bezerro),
+                  headers: {'Content-Type': 'application/json'},
+                );
 
-                  final response = await http.put(
-                    Uri.parse('$apiUrl${bezerro['id']}/'),
-                    headers: headers,
-                    body: json.encode(requestBody),
+                if (response.statusCode == 200) {
+                  fetchBezerros();
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Sucesso'),
+                        content: const Text('Alterações salvas com sucesso.'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
                   );
-
-                  if (response.statusCode == 200) {
-                    Navigator.pop(context);
-                    fetchBezerros();
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Sucesso'),
-                          content: const Text('Bezerro atualizado com sucesso.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Erro'),
-                          content: const Text('Ocorreu um erro ao editar o bezerro.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-                } catch (error) {
-                  print('Erro: $error');
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text('Erro'),
+                        content: const Text(
+                            'Ocorreu um erro ao salvar as alterações.'),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 }
+
+                Navigator.pop(context);
               },
               child: const Text('Salvar'),
             ),
@@ -235,77 +244,54 @@ class _ListBezerroState extends State<ListBezerro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 3, 52, 23),
-        title: Text('Lista de Bezerros'),
+        title: const Text('Bezerros'),
+        backgroundColor: darkBlue,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: bezerros.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              margin: EdgeInsets.only(bottom: 10),
-              child: Card(
-                color: Color.fromARGB(255, 231, 228, 228),
-                elevation: 3,
-                child: ListTile(
-                  title: Text(bezerros[index]['nome_bezerro']),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Número: ${bezerros[index]['nome_bezerro']}'),
-                      Text('Raça: ${bezerros[index]['raca']}'),
-                      Text('Lote: ${bezerros[index]['lote']}'),
-                      Text('Origem: ${bezerros[index]['origem']}'),
-                    ],
-                  ),
-                  trailing: Wrap(
-                    runSpacing: 8,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.edit,color: Color.fromARGB(255, 7, 87, 167),),
-                        onPressed: () {
-                          editarBezerro(bezerros[index]);
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.delete, color:Color.fromARGB(255, 255, 0, 0),),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Confirmar'),
-                                content: const Text('Deseja excluir este bezerro?'),
-                                actions: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Cancelar'),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      excluirBezerro(bezerros[index]['id'] as int);
-                                    },
-                                    child: const Text('Excluir'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+        child: bezerros.isEmpty
+            ? Center(
+                child: Text(
+                  'Não há bezerros disponíveis para este usuário.',
+                  style: TextStyle(fontSize: 16),
                 ),
+              )
+            : ListView.builder(
+                itemCount: bezerros.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Map<String, dynamic> bezerro = bezerros[index];
+                  return Card(
+                    child: ListTile(
+                      title: Text(bezerro['nome_bezerro']),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Número B: ${bezerro['numero_b']}'),
+                          Text('Raça: ${bezerro['raca']}'),
+                          Text(
+                              'Lote: ${bezerro['lote'] ?? 'N/A'}'), // Informação adicional: Lote
+                          Text(
+                              'Origem: ${bezerro['origem'] ?? 'N/A'}'), // Informação adicional: Origem
+                        ],
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Color.fromARGB(255, 7, 87, 167), size: 35),
+                            onPressed: () => editarBezerro(bezerro),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete, color: Color.fromARGB(255, 255, 0, 0), size: 35),
+                            onPressed: () => excluirBezerro(bezerro['id']),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
-      
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomBarItems,
         currentIndex: _selectedIndex,
@@ -337,5 +323,3 @@ class _ListBezerroState extends State<ListBezerro> {
     });
   }
 }
-
-   

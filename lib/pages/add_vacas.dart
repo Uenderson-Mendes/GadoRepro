@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reprovaca/components/hamburguer_botton.dart';
+import 'package:reprovaca/forms/prenha.dart';
 import '../forms/bezerro.dart';
 import '../main.dart';
 import 'package:reprovaca/forms/vaca.dart';
@@ -228,6 +229,75 @@ class _AddVacasState extends State<AddVacas> {
               ),
             ),
           ),
+          SizedBox(height: 10,),
+            Container(
+            margin: const EdgeInsets.all(8.0),
+            width: 180.0,
+            height: 100.0,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 241, 241, 241),
+              borderRadius: BorderRadius.circular(15.0),
+              border: Border.all(
+                color: Color.fromARGB(255, 54, 54, 54),
+                width: 1.0,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: TextButton(
+             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PrenhaAdd()),
+              );
+            },
+              style: ButtonStyle(
+                mouseCursor: MaterialStateMouseCursor.clickable,
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.asset(
+                      'imagens/download1.jpg',
+                      fit: BoxFit.cover,
+                      width: 65.0,
+                      height: 65.0,
+                    ),
+                  ),
+                  const SizedBox(width: 15.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Vacas Prenha',
+                          style: TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 36.0,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
