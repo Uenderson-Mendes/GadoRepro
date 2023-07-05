@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reprovaca/pages/list_vacas.dart';
 
+import '../models/list_solteira.dart';
 import '../pages/list_bezerro.dart';
 import '../models/list_prenha.dart';
 import '../pages/list_reprodutor.dart';
@@ -309,7 +310,7 @@ class CardCategoriar extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ListVacs()),
+                MaterialPageRoute(builder: (context) => ListSolteiras()),
               );
             },
             style: ButtonStyle(
@@ -333,7 +334,7 @@ class CardCategoriar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Vacas Paridas',
+                        'Vacas Solteiras',
                         style: TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,

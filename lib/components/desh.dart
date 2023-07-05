@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:reprovaca/components/desh.dart';
 import 'dart:async';
+import 'package:reprovaca/models/list_solteira.dart';
+
+import 'desh.dart';
+
+int? totalSolteira = ListSolteiras.totalSolteira;
 
 class DeshContainer extends StatefulWidget {
   const DeshContainer({Key? key}) : super(key: key);
@@ -72,7 +78,7 @@ class _DeshContainerState extends State<DeshContainer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Vacas Paridas',
+                    'Vacas Solteiras',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -99,7 +105,7 @@ class _DeshContainerState extends State<DeshContainer> {
                             ),
                           ),
                           Text(
-                            '23',
+                            '${ListSolteiras.totalSolteira}',
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,

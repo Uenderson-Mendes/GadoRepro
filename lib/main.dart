@@ -12,6 +12,7 @@ import 'package:reprovaca/pages/list_bezerro.dart';
 import 'package:reprovaca/pages/list_bezerro.dart';
 import 'package:reprovaca/pages/list_reprodutor.dart';
 import 'package:reprovaca/forms/prenha.dart';
+import 'package:reprovaca/models/list_solteira.dart';
 
 import 'forms/vaca.dart';
 
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         '/listrepro': (context) => ListRepro(),
         '/vacaprenha': (context) => PrenhaAdd(),
         '/listPrenha': (context) => ListPrenhaPage(),
+         '/listsolteira': (context) => ListSolteiras(),
 
       },
     );
