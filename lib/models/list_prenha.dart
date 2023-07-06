@@ -18,7 +18,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
   }
 
   Future<void> getPrenhas() async {
-    if (LoginPage.userId == null) {
+    if (LoginPage.userId != null ) {
       showDialog(
         context: context,
         builder: (BuildContext context) {

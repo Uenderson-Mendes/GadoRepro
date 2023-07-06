@@ -13,8 +13,11 @@ import 'package:reprovaca/pages/list_bezerro.dart';
 import 'package:reprovaca/pages/list_reprodutor.dart';
 import 'package:reprovaca/forms/prenha.dart';
 import 'package:reprovaca/models/list_solteira.dart';
+import 'package:reprovaca/models/list_parida.dart';
 
 import 'forms/vaca.dart';
+import 'models/list_inseminada.dart';
+import 'models/list_nocio.dart';
 
 const Color darkBlue = Color.fromARGB(255, 4, 78, 43);
 
@@ -47,7 +50,10 @@ class MyApp extends StatelessWidget {
         '/listrepro': (context) => ListRepro(),
         '/vacaprenha': (context) => PrenhaAdd(),
         '/listPrenha': (context) => ListPrenhaPage(),
-         '/listsolteira': (context) => ListSolteiras(),
+        '/listsolteira': (context) => ListSolteiras(),
+        '/listparida': (context) => ListParidas(),
+        '/list_nocio': (context) => List_nocio(),
+        '/listinseminada': (context) => Listinseminada(),
 
       },
     );
