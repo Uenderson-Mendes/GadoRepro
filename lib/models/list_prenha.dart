@@ -4,18 +4,23 @@ import 'dart:convert';
 import 'package:reprovaca/forms/login_page.dart';
 
 class ListPrenhaPage extends StatefulWidget {
+  static var totalVacasPrenhas;
+
   @override
   _ListPrenhaPageState createState() => _ListPrenhaPageState();
 }
 
 class _ListPrenhaPageState extends State<ListPrenhaPage> {
   List<VacaPrenha> vacasPrenhas = [];
+  int totalVacasPrenhas = 0;
 
-  @override
-  void initState() {
-    super.initState();
+@override
+void initState() {
+  super.initState();
+  Future.delayed(Duration.zero, () {
     getPrenhas();
-  }
+  });
+}
 
   Future<void> getPrenhas() async {
     if (LoginPage.userId != null ) {
@@ -54,6 +59,8 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
           vacasPrenhas = vacasPrenhasData
               .map<VacaPrenha>((data) => VacaPrenha.fromJson(data))
               .toList();
+          
+          totalVacasPrenhas = vacasPrenhas.length;
         });
       } else {
         showDialog(
@@ -138,7 +145,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 4, 68, 30),
-        title: Text('Vacas Prenhas'),
+        title: Text('Total Prenhas: ${totalVacasPrenhas ?? 0}'),
       ),
       body: ListView.builder(
         itemCount: vacasPrenhas.length,

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'components/cards_categoria.dart';
 import 'components/hamburguer.dart';
+import 'forms/login_page.dart';
 import 'pages/list_vacas.dart';
 import 'pages/alertas_vacas.dart';
 import 'pages/add_vacas.dart';
 import 'components/hamburguer_botton.dart';
 import 'package:reprovaca/components/desh.dart';
 
-
+String cpf = LoginPage.cpf;
 
 const Color darkBlue = Color.fromARGB(255, 4, 78, 43);
 
@@ -25,19 +29,54 @@ class _HomePageState extends State<HomePage> {
   HamburgerMenu hamburguer = HamburgerMenu();
   bool isDrawerOpen = false;
 
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName(LoginPage.userId);
+  }
+
+  Future<void> fetchUserName(int? userId) async {
+    final url = 'http://10.0.0.122:8000/usuario/$userId';
+    final response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final nome = jsonData['nome'];
+      setState(() {
+        userName = nome;
+      });
+    } else {
+      throw Exception('Falha ao buscar o nome do usuário.');
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
         backgroundColor: Color.fromARGB(255, 4, 78, 43),
+        title: Row(
+          children: [
+            Spacer(),
+            Text(
+              userName ?? '',
+              style: TextStyle(
+                fontSize: 22.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
       drawer: const HamburgerMenu(),
       backgroundColor: Color.fromARGB(255, 4, 78, 43),
       body: Column(
         children: [
           const SizedBox(height: 0),
-          DeshContainer(), // Adiciona o novo componente DeshContainer
+          DeshContainer(),
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(top: 8.0),
@@ -70,10 +109,9 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       margin: const EdgeInsets.all(8.0),
                       width: MediaQuery.of(context).size.width * 0.8,
-                      height: MediaQuery.of(context).size.height * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.6,
                       child: CardCategoriar(),
                     ),
-                    // Other items you want to add inside the ListView
                   ],
                 ),
               ),

@@ -5,22 +5,20 @@ import 'dart:convert';
 import '../components/hamburguer_botton.dart';
 import '../forms/login_page.dart';
 
-
 class Listinseminada extends StatefulWidget {
-  static int? totalSolteira;
-
   @override
   _ListinseminadaState createState() => _ListinseminadaState();
 }
 
 class _ListinseminadaState extends State<Listinseminada> {
   int _selectedIndex = 0;
-  List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
+  List<BottomNavigationBarItem> _bottomBarItems =
+      BottomNavigationItems.getItems();
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> vacas = [];
   final apiUrl = 'http://10.0.0.122:8000/vacas/';
   int? userId;
-  int totalSolteira = 0;
+  int totalInseminadas = 0; // Variable to store the count
 
   @override
   void initState() {
@@ -48,7 +46,7 @@ class _ListinseminadaState extends State<Listinseminada> {
 
         setState(() {
           vacas = filteredVacas;
-          totalSolteira = vacas.length;
+          totalInseminadas = vacas.length;
         });
       } else {
         showDialog(
@@ -103,7 +101,7 @@ class _ListinseminadaState extends State<Listinseminada> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('Erro'),
-              content: const Text('Ocorreuum erro ao excluir a vaca.'),
+              content: const Text('Ocorreu um erro ao excluir a vaca.'),
               actions: [
                 ElevatedButton(
                   onPressed: () {
@@ -169,7 +167,8 @@ class _ListinseminadaState extends State<Listinseminada> {
                 ),
                 TextFormField(
                   controller: dataNascimentoController,
-                  decoration: InputDecoration(labelText: 'Data de Nascimento'),
+                  decoration:
+                      InputDecoration(labelText: 'Data de Nascimento'),
                 ),
                 DropdownButtonFormField<String>(
                   value: statuController.text,
@@ -240,24 +239,13 @@ class _ListinseminadaState extends State<Listinseminada> {
 
                   if (response.statusCode == 200) {
                     Navigator.pop(context);
+                    setState(() {
+                      // Atualiza as variáveis e busca as vacas novamente
+
+                      vacas = [];
+                      totalInseminadas = 0;
+                    });
                     fetchVacas();
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Sucesso'),
-                          content: const Text('Vaca atualizada com sucesso.'),
-                          actions: [
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
                   } else {
                     showDialog(
                       context: context,
@@ -294,7 +282,7 @@ class _ListinseminadaState extends State<Listinseminada> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 3, 52, 23),
-        title: Text('Listas Vacas'),
+        title: Text('Total Inseminadas: ${totalInseminadas ?? 0}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -328,17 +316,21 @@ class _ListinseminadaState extends State<Listinseminada> {
                           runSpacing: 8,
                           children: [
                             IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Color.fromARGB(255, 7, 87, 167),
-                                  size: 35),
+                              icon: Icon(
+                                Icons.edit,
+                                color: Color.fromARGB(255, 7, 87, 167),
+                                size: 35,
+                              ),
                               onPressed: () {
                                 editarVaca(vacas[index]);
                               },
                             ),
                             IconButton(
-                              icon: Icon(Icons.delete,
-                                  color: Color.fromARGB(255, 255, 0, 0),
-                                  size: 35),
+                              icon: Icon(
+                                Icons.delete,
+                                color: Color.fromARGB(255, 255, 0, 0),
+                                size: 35,
+                              ),
                               onPressed: () {
                                 excluirVaca(vacas[index]['id']);
                               },
@@ -351,7 +343,6 @@ class _ListinseminadaState extends State<Listinseminada> {
                 },
               ),
       ),
-
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomBarItems,
         currentIndex: _selectedIndex,

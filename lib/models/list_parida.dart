@@ -7,7 +7,7 @@ import '../forms/login_page.dart';
 
 
 class ListParidas extends StatefulWidget {
-  static int? totalSolteira;
+  static int? totalparida;
 
   @override
   _ListParidasState createState() => _ListParidasState();
@@ -20,7 +20,7 @@ class _ListParidasState extends State<ListParidas> {
   List<Map<String, dynamic>> vacas = [];
   final apiUrl = 'http://10.0.0.122:8000/vacas/';
   int? userId;
-  int totalSolteira = 0;
+  int totalparida = 0;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _ListParidasState extends State<ListParidas> {
 
         setState(() {
           vacas = filteredVacas;
-          totalSolteira = vacas.length;
+          totalparida = vacas.length;
         });
       } else {
         showDialog(
@@ -241,6 +241,7 @@ class _ListParidasState extends State<ListParidas> {
                   if (response.statusCode == 200) {
                     Navigator.pop(context);
                     fetchVacas();
+                    // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -259,6 +260,7 @@ class _ListParidasState extends State<ListParidas> {
                       },
                     );
                   } else {
+                    // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -294,7 +296,7 @@ class _ListParidasState extends State<ListParidas> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 3, 52, 23),
-        title: Text('Listas Vacas'),
+        title: Text('Total Parida: ${totalparida ?? 0}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

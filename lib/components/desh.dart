@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:reprovaca/components/constants.dart';
 import 'package:reprovaca/components/desh.dart';
 import 'dart:async';
 import 'package:reprovaca/models/list_solteira.dart';
-
+import 'package:reprovaca/models/list_prenha.dart';
+import 'constants.dart';
 import 'desh.dart';
+import 'constants.dart';
 
-int? totalSolteira = ListSolteiras.totalSolteira;
+
+ 
 
 class DeshContainer extends StatefulWidget {
   const DeshContainer({Key? key}) : super(key: key);
-
+   
   @override
   _DeshContainerState createState() => _DeshContainerState();
 }
@@ -105,7 +109,7 @@ class _DeshContainerState extends State<DeshContainer> {
                             ),
                           ),
                           Text(
-                            '${ListSolteiras.totalSolteira}',
+                            ' ',
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
@@ -124,7 +128,6 @@ class _DeshContainerState extends State<DeshContainer> {
               ],
             ),
           ),
-       
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             width: 180.0,
@@ -150,7 +153,7 @@ class _DeshContainerState extends State<DeshContainer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Vacas Solteiras',
+                    '',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -196,8 +199,6 @@ class _DeshContainerState extends State<DeshContainer> {
               ],
             ),
           ),
-
-          
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             width: 180.0,
@@ -269,8 +270,6 @@ class _DeshContainerState extends State<DeshContainer> {
               ],
             ),
           ),
-
-          
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             width: 180.0,
@@ -342,8 +341,6 @@ class _DeshContainerState extends State<DeshContainer> {
               ],
             ),
           ),
-
-          
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10.0),
             width: 180.0,
@@ -415,11 +412,8 @@ class _DeshContainerState extends State<DeshContainer> {
               ],
             ),
           ),
-         
         ],
       ),
     );
   }
 }
-
-

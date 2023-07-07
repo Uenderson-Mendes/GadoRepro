@@ -18,14 +18,14 @@ class CardCategoriar extends StatelessWidget {
       children: <Widget>[
         
         Container(
-          margin: const EdgeInsets.all(8.0),
-          width: 140.0,
-          height: 80.0,
+         margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -86,19 +86,19 @@ class CardCategoriar extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         Container(
-          margin: const EdgeInsets.all(8.0),
-          width: 140.0,
-          height: 80.0,
+          margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
+                color: const Color.fromARGB(255, 50, 50, 50).withOpacity(0.3),
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: Offset(0, 3),
@@ -154,14 +154,14 @@ class CardCategoriar extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+         margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -222,14 +222,14 @@ class CardCategoriar extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+         margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -290,14 +290,14 @@ class CardCategoriar extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+        margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -358,14 +358,14 @@ class CardCategoriar extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+           margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -426,14 +426,14 @@ class CardCategoriar extends StatelessWidget {
         ),
        
          Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+        margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -494,14 +494,14 @@ class CardCategoriar extends StatelessWidget {
         ),
           
          Container(
-          margin: const EdgeInsets.all(6.0),
-          width: 140.0,
-          height: 80.0,
+        margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 241, 241, 241),
             borderRadius: BorderRadius.circular(15.0),
             border: Border.all(
-              color: Color.fromARGB(255, 54, 54, 54),
+              color: Color.fromARGB(255, 115, 115, 115),
               width: 1.0,
             ),
             boxShadow: [
@@ -541,7 +541,7 @@ class CardCategoriar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'VacasInseminadas',
+                        'Vacas Inseminadas',
                         style: TextStyle(
                           fontSize: 22.0,
                           fontWeight: FontWeight.bold,
@@ -559,7 +559,7 @@ class CardCategoriar extends StatelessWidget {
               ],
             ),
           ),
-        ),SizedBox(height: 75,),
+        ),SizedBox(height: 155,),
       ],
     );
   }

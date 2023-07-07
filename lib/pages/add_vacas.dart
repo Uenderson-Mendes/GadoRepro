@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reprovaca/components/hamburguer_botton.dart';
+import 'package:reprovaca/forms/login_page.dart';
 import 'package:reprovaca/forms/prenha.dart';
 import '../forms/bezerro.dart';
 import '../main.dart';
@@ -27,16 +28,16 @@ class _AddVacasState extends State<AddVacas> {
         padding: EdgeInsets.all(10.0),
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.all(8.0),
-            width: 180.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 241, 241, 241),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                color: Color.fromARGB(255, 54, 54, 54),
-                width: 1.0,
-              ),
+           margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.circular(15.0),
+            border: Border.all(
+              color: Color.fromARGB(255, 115, 115, 115),
+              width: 1.0,
+            ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
@@ -74,7 +75,7 @@ class _AddVacasState extends State<AddVacas> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Vacas Paridas',
+                          'Vacas',
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
@@ -95,16 +96,16 @@ class _AddVacasState extends State<AddVacas> {
           ),
           SizedBox(height: 10),
           Container(
-            margin: const EdgeInsets.all(8.0),
-            width: 180.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 241, 241, 241),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                color: Color.fromARGB(255, 54, 54, 54),
-                width: 1.0,
-              ),
+             margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.circular(15.0),
+            border: Border.all(
+              color: Color.fromARGB(255, 115, 115, 115),
+              width: 1.0,
+            ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
@@ -163,16 +164,16 @@ class _AddVacasState extends State<AddVacas> {
           ),
  SizedBox(height: 10),
            Container(
-            margin: const EdgeInsets.all(8.0),
-            width: 180.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 241, 241, 241),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                color: Color.fromARGB(255, 54, 54, 54),
-                width: 1.0,
-              ),
+          margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.circular(15.0),
+            border: Border.all(
+              color: Color.fromARGB(255, 115, 115, 115),
+              width: 1.0,
+            ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
@@ -231,16 +232,16 @@ class _AddVacasState extends State<AddVacas> {
           ),
           SizedBox(height: 10,),
             Container(
-            margin: const EdgeInsets.all(8.0),
-            width: 180.0,
-            height: 100.0,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 241, 241, 241),
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                color: Color.fromARGB(255, 54, 54, 54),
-                width: 1.0,
-              ),
+         margin: const EdgeInsets.all(6.0),
+          width: 146.0,
+          height: 90.0,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.circular(15.0),
+            border: Border.all(
+              color: Color.fromARGB(255, 115, 115, 115),
+              width: 1.0,
+            ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.3),
@@ -254,7 +255,7 @@ class _AddVacasState extends State<AddVacas> {
              onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PrenhaAdd()),
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
               style: ButtonStyle(
@@ -278,7 +279,7 @@ class _AddVacasState extends State<AddVacas> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Vacas Prenha',
+                          'IATF',
                           style: TextStyle(
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
