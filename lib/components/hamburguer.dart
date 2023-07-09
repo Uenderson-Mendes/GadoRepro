@@ -96,6 +96,7 @@ class _HamburgerMenuState extends State<HamburgerMenu> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              
                             ),
                           ],
                         ),
