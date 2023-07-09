@@ -7,7 +7,7 @@ import 'package:reprovaca/pages/list_vacas.dart';
 import 'package:reprovaca/main.dart';
 import '../forms/login_page.dart';
 
-String cpf = LoginPage.cpf;
+String email = LoginPage.email;
 
 class HamburgerMenu extends StatefulWidget {
   const HamburgerMenu({Key? key}) : super(key: key);

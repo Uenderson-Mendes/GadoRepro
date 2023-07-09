@@ -11,7 +11,7 @@ import 'pages/add_vacas.dart';
 import 'components/hamburguer_botton.dart';
 import 'package:reprovaca/components/desh.dart';
 
-String cpf = LoginPage.cpf;
+String email = LoginPage.email;
 
 const Color darkBlue = Color.fromARGB(255, 4, 78, 43);
 
@@ -123,8 +123,8 @@ class _HomePageState extends State<HomePage> {
         items: _bottomBarItems,
         currentIndex: _selectedIndex,
         onTap: _onBottomBarItemTapped,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: const Color.fromARGB(255, 120, 120, 120),
+        unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         backgroundColor: darkBlue,
       ),
     );

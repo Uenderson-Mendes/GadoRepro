@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
-  static String cpf = '';
+  static String email = '';
   static int? userId; // Variável para armazenar o ID do usuário
 
   const LoginPage({Key? key}) : super(key: key);
@@ -14,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
-  TextEditingController _cpfController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   TextEditingController _senhaController = TextEditingController();
 
   Future<void> _performLogin() async {
@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       return; // Check if the widget is still mounted
     }
 
-    String cpf = _cpfController.text.trim();
+    String email = _emailController.text.trim();
     String senha = _senhaController.text.trim();
 
     // Replace 'http://192.168.66.32:8000' with the appropriate API URL
@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
       bool isAuthenticated = false;
 
       for (var user in users) {
-        if (user['cpf'] == cpf && user['senha'] == senha) {
+        if (user['email'] == email && user['senha'] == senha) {
           isAuthenticated = true;
           LoginPage.userId = user['id']; // Armazena o ID do usuário na variável userId
           break;
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
 
-        LoginPage.cpf = cpf; // Atribui o valor de 'nome' à variável estática na classe LoginPage
+        LoginPage.email = email; // Atribui o valor de 'nome' à variável estática na classe LoginPage
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         showDialog(
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 15.0),
               Center(
                 child: Text(
-                  'Conect-se',
+                  'Conecte-se',
                   style: TextStyle(
                     color: const Color.fromARGB(255, 0, 0, 0),
                     fontSize: 18,
@@ -137,9 +137,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 70.0),
               TextFormField(
-                controller: _cpfController,
+                controller: _emailController,
                 decoration: InputDecoration(
-                  labelText: 'CPF',
+                  labelText: 'Email',
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(

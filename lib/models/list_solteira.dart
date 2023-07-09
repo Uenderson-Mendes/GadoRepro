@@ -294,7 +294,7 @@ class _ListSolteirasState extends State<ListSolteiras> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 3, 52, 23),
-        title: Text('Listas Vacas'),
+        title: Text('Total Solteiras: ${totalSolteira ?? 0}'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -355,8 +355,8 @@ class _ListSolteirasState extends State<ListSolteiras> {
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomBarItems,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
+ selectedItemColor: const Color.fromARGB(255, 120, 120, 120),
+        unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         backgroundColor: darkBlue,
         onTap: _onBottomBarItemTapped,
       ),

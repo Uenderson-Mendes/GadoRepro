@@ -346,8 +346,8 @@ class _List_nocioState extends State<List_nocio> {
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomBarItems,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: const Color.fromARGB(255, 120, 120, 120),
+        unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         backgroundColor: darkBlue,
         onTap: _onBottomBarItemTapped,
       ),

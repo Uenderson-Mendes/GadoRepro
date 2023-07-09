@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:reprovaca/forms/login_page.dart';
+import '../components/hamburguer_botton.dart';
 
 class ListPrenhaPage extends StatefulWidget {
   static var totalVacasPrenhas;
@@ -11,19 +12,23 @@ class ListPrenhaPage extends StatefulWidget {
 }
 
 class _ListPrenhaPageState extends State<ListPrenhaPage> {
+  int _selectedIndex = 0;
+  List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
+  Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<VacaPrenha> vacasPrenhas = [];
   int totalVacasPrenhas = 0;
+  int? userId;
 
-@override
-void initState() {
-  super.initState();
-  Future.delayed(Duration.zero, () {
-    getPrenhas();
-  });
-}
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      getPrenhas();
+    });
+  }
 
   Future<void> getPrenhas() async {
-    if (LoginPage.userId != null ) {
+    if (LoginPage.userId == null) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -44,8 +49,7 @@ void initState() {
       return;
     }
 
-    Uri apiUrl = Uri.parse(
-        'http://10.0.0.122:8000/Prenha/?usuario=${LoginPage.userId}');
+    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/Prenha/?usuario=${LoginPage.userId}');
 
     try {
       final response = await http.get(apiUrl, headers: {
@@ -59,7 +63,7 @@ void initState() {
           vacasPrenhas = vacasPrenhasData
               .map<VacaPrenha>((data) => VacaPrenha.fromJson(data))
               .toList();
-          
+
           totalVacasPrenhas = vacasPrenhas.length;
         });
       } else {
@@ -83,6 +87,23 @@ void initState() {
       }
     } catch (error) {
       print('Erro: $error');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Erro'),
+            content: const Text('Ocorreu um erro ao obter as vacas prenhas.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -128,7 +149,7 @@ void initState() {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child:  Text('OK'),
+                  child: Text('OK'),
                 ),
               ],
             );
@@ -137,6 +158,23 @@ void initState() {
       }
     } catch (error) {
       print('Erro: $error');
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Erro'),
+            content: const Text('Ocorreu um erro ao atualizar o status.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 
@@ -151,7 +189,7 @@ void initState() {
         itemCount: vacasPrenhas.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text('${vacasPrenhas[index].nome_vaca} - ${vacasPrenhas[index].numero_vaca}'),
+            title: Text('${vacasPrenhas[index].nomeVaca} - ${vacasPrenhas[index].numeroVaca}'),
             subtitle: Text(vacasPrenhas[index].dataNascimento ?? ''),
             trailing: ElevatedButton(
               onPressed: () {
@@ -162,28 +200,56 @@ void initState() {
           );
         },
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: _bottomBarItems,
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 120, 120, 120),
+        unselectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: darkBlue,
+        onTap: _onBottomBarItemTapped,
+      ),
     );
+  }
+
+  void _onBottomBarItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      switch (index) {
+        case 0:
+          Navigator.pushNamed(context, '/home');
+          break;
+        case 1:
+          Navigator.pushNamed(context, '/add');
+          break;
+        case 2:
+          Navigator.pushNamed(context, '/alert');
+          break;
+        case 3:
+          Navigator.pushNamed(context, '/list');
+          break;
+      }
+    });
   }
 }
 
 class VacaPrenha {
   final int id;
-  final String? nome_vaca;
-  final String? numero_vaca;
+  final String? nomeVaca;
+  final String? numeroVaca;
   final String? dataNascimento;
 
   VacaPrenha({
     required this.id,
-    this.nome_vaca,
-    this.numero_vaca,
+    this.nomeVaca,
+    this.numeroVaca,
     this.dataNascimento,
   });
 
   factory VacaPrenha.fromJson(Map<String, dynamic> json) {
     return VacaPrenha(
       id: json['id'],
-      nome_vaca: json['nome_vaca'],
-      numero_vaca: json['numero_v'],
+      nomeVaca: json['nome_vaca'],
+      numeroVaca:json['numero_vaca'],
       dataNascimento: json['data_nascimento_B'],
     );
   }

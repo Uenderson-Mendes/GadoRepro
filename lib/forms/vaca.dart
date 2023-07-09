@@ -4,10 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:date_field/date_field.dart';
 import 'package:intl/intl.dart';
 import 'package:reprovaca/forms/login_page.dart';
+import 'package:reprovaca/forms/prenha.dart';
 import 'login_page.dart';
+
 int? userId = LoginPage.userId;
 
 class VacasAdd extends StatefulWidget {
+   static int? vacaId;
   @override
   _VacasAddState createState() => _VacasAddState();
 }
@@ -38,11 +41,14 @@ class _VacasAddState extends State<VacasAdd> {
       "value": "inseminada",
       "display_name": "Inseminada",
     },
-       {
+    {
       "value": "prenha",
       "display_name": "Prenha",
     },
   ];
+
+  int? createdVacaId;
+  int? vacaId;
 
   Future<Map<String, dynamic>> fetchUserData(String name, String password, String cpf) async {
     Uri apiUrl = Uri.parse('http://10.0.0.122:8000/usuario/?name=$name&password=$password&cpf=$cpf');
@@ -86,10 +92,21 @@ class _VacasAddState extends State<VacasAdd> {
         body: json.encode(vacaData),
       );
 
-     if (response.statusCode == 201) {
-        if (selectedStatus == "prenha") {
-          Navigator.pushReplacementNamed(context, '/vacaprenha');
-        } else {
+      if (response.statusCode == 201) {
+        createdVacaId = json.decode(response.body)['id'];
+
+    if (selectedStatus == "prenha" && createdVacaId != null) {
+  setState(() {
+    vacaId = createdVacaId;
+  });
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => PrenhaAdd(vacaId: vacaId),
+    ),
+  );
+}
+ else {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -203,13 +220,17 @@ class _VacasAddState extends State<VacasAdd> {
                 onChanged: (String? value) {
                   setState(() {
                     selectedStatus = value;
+                    if (selectedStatus == "prenha") {
+                      vacaId = createdVacaId;
+                    } else {
+                      vacaId = null;
+                    }
                   });
                 },
                 decoration: InputDecoration(
                   labelText: 'Status',
                 ),
               ),
-             
               SizedBox(height: 16.0),
               Center(
                 child: ElevatedButton(
