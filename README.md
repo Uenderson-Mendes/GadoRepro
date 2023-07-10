@@ -1,4 +1,4 @@
-### ⚠️Atenção video com demostração no fim do tutorial!
+### ⚠️Atenção video com demostração!
 # APP de controle de Rebanho Bovinos em Flutter
 
 
