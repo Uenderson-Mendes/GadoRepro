@@ -81,7 +81,7 @@ class _FormsPageState extends State<FormsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Account'),
+        title: const Text('Criar Conta'),
         backgroundColor: const Color.fromARGB(255, 4, 78, 43),
       ),
       body: Padding(

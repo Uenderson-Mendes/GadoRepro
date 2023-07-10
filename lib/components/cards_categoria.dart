@@ -52,13 +52,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/fa.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                   width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,16 +117,16 @@ class CardCategoriar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Image.asset(
-                    'imagens/download1.jpg',
-                    fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+             ClipRRect(
+  borderRadius: BorderRadius.circular(50),
+  child: Image.asset(
+    'imagens/bezerro2.png',
+    fit: BoxFit.cover,
+  width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,13 +188,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/reprodutor.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                  width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,13 +256,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/prenha.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                   width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,13 +324,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/fa.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                  width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -392,13 +392,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/parida.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                   width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,13 +460,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/solteira.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                  width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -528,13 +528,13 @@ class CardCategoriar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(50),
                   child: Image.asset(
-                    'imagens/download1.jpg',
+                    'imagens/prenha.jpg',
                     fit: BoxFit.cover,
-                    width: 65.0,
-                    height: 65.0,
+                    width: 70.0,
+                    height: 70.0,
                   ),
                 ),
-                const SizedBox(width: 15.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

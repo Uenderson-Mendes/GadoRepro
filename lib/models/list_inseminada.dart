@@ -6,6 +6,9 @@ import '../components/hamburguer_botton.dart';
 import '../forms/login_page.dart';
 
 class Listinseminada extends StatefulWidget {
+static int totalInseminadas = 0;
+ const Listinseminada({Key? key}) : super(key: key);
+
   @override
   _ListinseminadaState createState() => _ListinseminadaState();
 }
@@ -18,7 +21,7 @@ class _ListinseminadaState extends State<Listinseminada> {
   List<Map<String, dynamic>> vacas = [];
   final apiUrl = 'http://10.0.0.122:8000/vacas/';
   int? userId;
-  int totalInseminadas = 0; // Variable to store the count
+  static int totalInseminadas = 0; // Variable to store the count
 
   @override
   void initState() {

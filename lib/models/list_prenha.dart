@@ -19,7 +19,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> vacas = [];
   List<String> dataNascimentoBList = [];
-  final apiUrl = 'http://192.168.18.122:8000/vacas/';
+  final apiUrl = 'http://10.0.0.122:8000/vacas/';
   int? userId;
   int? totalPrenha;
 
@@ -81,74 +81,97 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
     }
   }
 
- Future<void> fetchPrenhaData(int idvaca) async {
-  final prenhaUrl = 'http://192.168.18.122:8000/Prenha/';
-  final response = await http.get(Uri.parse('$prenhaUrl?id=$idvaca'));
+  Future<void> fetchPrenhaData(int idvaca) async {
+    final prenhaUrl = 'http://10.0.0.122:8000/Prenha/';
+    final response = await http.get(Uri.parse('$prenhaUrl?id=$idvaca'));
 
-  if (response.statusCode == 200) {
-    List<dynamic> prenhaData = json.decode(response.body);
+    if (response.statusCode == 200) {
+      List<dynamic> prenhaData = json.decode(response.body);
 
-    for (int index = 0; index < prenhaData.length; index++) {
-      var data = prenhaData[index];
-      int vacaId = data['vaca_id'];
-      String dataNascimentoB = data['data_nascimento_B'];
+      for (int index = 0; index < prenhaData.length; index++) {
+        var data = prenhaData[index];
+        int vacaId = data['vaca_id'];
+        String dataNascimentoB = data['data_nascimento_B'];
 
-      setState(() {
-        dataNascimentoBList.add(dataNascimentoB);
-        vacas[index]['dataNascimentoB'] = dataNascimentoB;
-      });
+        setState(() {
+          dataNascimentoBList.add(dataNascimentoB);
+          vacas[index]['dataNascimentoB'] = dataNascimentoB;
+        });
+      }
+    } else {
+      print('Failed to fetch Prenha data. Status code: ${response.statusCode}');
     }
-  } else {
-    print('Failed to fetch Prenha data. Status code: ${response.statusCode}');
   }
-}
-
 
   Future<void> excluirVaca(int id) async {
-    try {
-      final response = await http.delete(Uri.parse('$apiUrl$id/'));
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Confirmação'),
+          content: const Text('Tem certeza de que deseja excluir esta vaca?'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pop(context); // Fecha o pop-up de confirmação
 
-      if (response.statusCode == 204) {
-        fetchVacas();
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Sucesso'),
-              content: const Text('Vaca excluída com sucesso.'),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
+                try {
+                  final response = await http.delete(Uri.parse('$apiUrl$id/'));
+
+                  if (response.statusCode == 204) {
+                    fetchVacas();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Sucesso'),
+                          content: const Text('Vaca excluída com sucesso.'),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Erro'),
+                          content: const Text('Ocorreu um erro ao excluir a vaca.'),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                } catch (error) {
+                  print('Erro: $error');
+                }
+              },
+              child: const Text('Confirmar'),
+            ),
+          ],
         );
-      } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Erro'),
-              content: const Text('Ocorreu um erro ao excluir a vaca.'),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      print('Erro: $error');
-    }
+      },
+    );
   }
 
   void editarVaca(Map<String, dynamic> vaca) {
@@ -210,7 +233,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
                       child: Text('Parida'),
                     ),
                     DropdownMenuItem<String>(
-                      value: 'solteira',
+                      value:'solteira',
                       child: Text('Solteira'),
                     ),
                     DropdownMenuItem<String>(
@@ -238,7 +261,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
             ),
           ),
           actions: [
-           ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },

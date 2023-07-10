@@ -72,13 +72,7 @@ class _HamburgerMenuState extends State<HamburgerMenu> {
                 ),
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40.0, right: 10.0),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundImage: AssetImage('imagens/fa.jpg'),
-                      ),
-                    ),
+                   
                     Expanded(
                       child: Align(
                         alignment: Alignment.topRight,

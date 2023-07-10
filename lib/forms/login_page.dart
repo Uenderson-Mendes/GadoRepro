@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     String senha = _senhaController.text.trim();
 
     // Replace 'http://192.168.66.32:8000' with the appropriate API URL
-    Uri apiUrl = Uri.parse('http://192.168.18.122:8000/usuario/');
+    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/usuario/');
     final response = await http.get(apiUrl);
 
     if (response.statusCode == 200) {
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 40.0),
+              const SizedBox(height: 50.0),
               Center(
                 child: Text(
                   'ReproGado',

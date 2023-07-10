@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:reprovaca/components/constants.dart';
+import 'package:reprovaca/components/constants.dart';
 import 'package:reprovaca/components/desh.dart';
+import 'package:reprovaca/components/desh.dart';
+import 'package:reprovaca/forms/login_page.dart';
+import 'package:reprovaca/models/list_inseminada.dart';
 import 'dart:async';
 import 'package:reprovaca/models/list_solteira.dart';
 import 'package:reprovaca/models/list_prenha.dart';
@@ -8,12 +12,14 @@ import 'constants.dart';
 import 'desh.dart';
 import 'constants.dart';
 
-
- 
+int? totalInseminadas;
+int? userId;
 
 class DeshContainer extends StatefulWidget {
-  const DeshContainer({Key? key}) : super(key: key);
-   
+  int? userId = LoginPage.userId;
+   int? totalInseminadas = Listinseminada.totalInseminadas;
+  DeshContainer({Key? key}) : super(key: key);
+
   @override
   _DeshContainerState createState() => _DeshContainerState();
 }
@@ -109,7 +115,7 @@ class _DeshContainerState extends State<DeshContainer> {
                             ),
                           ),
                           Text(
-                            ' ',
+                            '${AppConstants.totalInseminadas}',
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
@@ -117,11 +123,15 @@ class _DeshContainerState extends State<DeshContainer> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.pets,
-                        size: 40.0,
-                        color: Colors.black,
-                      ),
+                      ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'imagens/solteira.jpg',
+                    fit: BoxFit.cover,
+                   width: 130.0,
+                    height: 100.0,
+                  ),
+                ),
                     ],
                   ),
                 ),
@@ -153,7 +163,7 @@ class _DeshContainerState extends State<DeshContainer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    '',
+                    'Vacas Prenhas',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
@@ -188,11 +198,15 @@ class _DeshContainerState extends State<DeshContainer> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.pets,
-                        size: 40.0,
-                        color: Colors.black,
-                      ),
+                         ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'imagens/prenha.jpg',
+                    fit: BoxFit.cover,
+                   width: 130.0,
+                    height: 100.0,
+                  ),
+                ),
                     ],
                   ),
                 ),
@@ -259,11 +273,15 @@ class _DeshContainerState extends State<DeshContainer> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.pets,
-                        size: 40.0,
-                        color: Colors.black,
-                      ),
+                         ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'imagens/fa.jpg',
+                    fit: BoxFit.cover,
+                  width: 130.0,
+                    height: 100.0,
+                  ),
+                ),
                     ],
                   ),
                 ),
@@ -330,11 +348,15 @@ class _DeshContainerState extends State<DeshContainer> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.pets,
-                        size: 40.0,
-                        color: Colors.black,
-                      ),
+                     ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'imagens/solteira.jpg',
+                    fit: BoxFit.cover,
+                   width: 130.0,
+                    height: 100.0,
+                  ),
+                ),
                     ],
                   ),
                 ),
@@ -401,11 +423,15 @@ class _DeshContainerState extends State<DeshContainer> {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.pets,
-                        size: 40.0,
-                        color: Colors.black,
-                      ),
+                     ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    'imagens/fa.jpg',
+                    fit: BoxFit.cover,
+                    width: 130.0,
+                    height: 100.0,
+                  ),
+                ),
                     ],
                   ),
                 ),
