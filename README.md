@@ -1,16 +1,13 @@
-# reprovaca
+### ⚠️Atenção video com demostração no fim do tutorial!
+# APP de controle de Rebanho Bovinos em Flutter
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Assista ao video de demostração
 
-A few resources to get you started if this is your first Flutter project:
+## [🎬Demontração](https://drive.google.com/file/d/1eTeSrVDYayMeuuZHtQGa3P9GjGHiFkjp/view?usp=drivesdk)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# congratulations 😎
+![exemplo](https://gifburg.com/images/gifs/congratulations/gifs/0006.gif)
+
