@@ -102,7 +102,7 @@ class _HamburgerMenuState extends State<HamburgerMenu> {
             ),
           ),
           ListTile(
-            title: const Text('Gerenciar clientes'),
+            title: const Text('Gerenciar '),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/home');
             },
