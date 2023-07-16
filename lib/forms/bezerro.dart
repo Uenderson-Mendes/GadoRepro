@@ -21,7 +21,7 @@ class _BezzerrosAddState extends State<BezzerrosAdd> {
   TextEditingController usuarioController = TextEditingController();
   late DateTime selectedDate;
 Future<void> adicionarBezzerro() async {
-  Uri apiUrl = Uri.parse('http://10.0.0.122:8000/bezerros/');
+  Uri apiUrl = Uri.parse('http://10.0.1.5:8000/bezerros/');
 
   // Formate a data de nascimento para o formato esperado pelo Django
   String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);

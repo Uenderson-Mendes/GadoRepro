@@ -14,7 +14,7 @@ class _ListReproState extends State<ListRepro> {
   List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> reprodutores = [];
-  final apiUrl = 'http://10.0.0.122:8000/reprodutor/';
+  final apiUrl = 'http://10.0.1.5:8000/reprodutor/';
  int? userId;
 
   @override

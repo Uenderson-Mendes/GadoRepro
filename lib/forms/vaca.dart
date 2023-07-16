@@ -51,7 +51,7 @@ class _VacasAddState extends State<VacasAdd> {
   int? vacaId;
 
   Future<Map<String, dynamic>> fetchUserData(String name, String password, String cpf) async {
-    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/usuario/?name=$name&password=$password&cpf=$cpf');
+    Uri apiUrl = Uri.parse('http://10.0.1.5:8000/usuario/?name=$name&password=$password&cpf=$cpf');
 
     try {
       final response = await http.get(apiUrl);
@@ -69,7 +69,7 @@ class _VacasAddState extends State<VacasAdd> {
   }
 
   Future<void> adicionarVaca() async {
-    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/vacas/');
+    Uri apiUrl = Uri.parse('http://10.0.1.5:8000/vacas/');
 
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
     String nome = usuarioController.text;

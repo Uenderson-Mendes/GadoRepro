@@ -19,7 +19,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> vacas = [];
   List<String> dataNascimentoBList = [];
-  final apiUrl = 'http://10.0.0.122:8000/vacas/';
+  final apiUrl = 'http://10.0.1.5:8000/vacas/';
   int? userId;
   int? totalPrenha;
 
@@ -82,7 +82,7 @@ class _ListPrenhaPageState extends State<ListPrenhaPage> {
   }
 
   Future<void> fetchPrenhaData(int idvaca) async {
-    final prenhaUrl = 'http://10.0.0.122:8000/Prenha/';
+    final prenhaUrl = 'http://10.0.1.5:8000/Prenha/';
     final response = await http.get(Uri.parse('$prenhaUrl?id=$idvaca'));
 
     if (response.statusCode == 200) {

@@ -116,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 16),
             Text(
-              'ReproVaca',
+              'ReproGado',
               style: TextStyle(
                 color: const Color.fromARGB(255, 0, 0, 0),
                 fontSize: 30,

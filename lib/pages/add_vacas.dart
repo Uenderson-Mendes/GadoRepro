@@ -231,73 +231,7 @@ class _AddVacasState extends State<AddVacas> {
             ),
           ),
           SizedBox(height: 10,),
-            Container(
-         margin: const EdgeInsets.all(6.0),
-          width: 146.0,
-          height: 90.0,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 241, 241, 241),
-            borderRadius: BorderRadius.circular(15.0),
-            border: Border.all(
-              color: Color.fromARGB(255, 115, 115, 115),
-              width: 1.0,
-            ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: TextButton(
-             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-              style: ButtonStyle(
-                mouseCursor: MaterialStateMouseCursor.clickable,
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.asset(
-                      'imagens/download1.jpg',
-                      fit: BoxFit.cover,
-                      width: 65.0,
-                      height: 65.0,
-                    ),
-                  ),
-                  const SizedBox(width: 15.0),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'IATF',
-                          style: TextStyle(
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_forward,
-                    size: 36.0,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
-              ),
-            ),
-          ),
+           
 
         ],
       ),

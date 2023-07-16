@@ -70,7 +70,7 @@ class _DeshContainerState extends State<DeshContainer> {
   }
 
   Future<void> fetchCowsData() async {
-  final url = 'http://10.0.0.122:8000/vacas/?usuario=$userId'; // Replace with the correct URL
+  final url = 'http://10.0.1.5:8000/vacas/?usuario=$userId'; // Replace with the correct URL
   final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     try {

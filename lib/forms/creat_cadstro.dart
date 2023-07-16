@@ -16,7 +16,7 @@ class _FormsPageState extends State<FormsPage> {
   TextEditingController emailController = TextEditingController();
 
   Future<void> _createAccount(BuildContext context) async {
-    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/usuario/'); // URL da API local
+    Uri apiUrl = Uri.parse('http://10.0.1.5:8000/usuario/'); // URL da API local
 
     // Criar um mapa com os dados do usuário
     Map<String, dynamic> userData = {

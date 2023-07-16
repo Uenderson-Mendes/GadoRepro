@@ -18,7 +18,7 @@ class _ListParidasState extends State<ListParidas> {
   List<BottomNavigationBarItem> _bottomBarItems = BottomNavigationItems.getItems();
   Color darkBlue = Color.fromARGB(255, 4, 78, 43);
   List<Map<String, dynamic>> vacas = [];
-  final apiUrl = 'http://10.0.0.122:8000/vacas/';
+  final apiUrl = 'http://10.0.1.5:8000/vacas/';
   int? userId;
   int totalparida = 0;
 

@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> fetchUserName(int? userId) async {
-    final url = 'http://10.0.0.122:8000/usuario/$userId';
+    final url = 'http://10.0.1.5:8000/usuario/$userId';
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

@@ -60,7 +60,7 @@ void initState() {
       return;
     }
 
-    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/Prenha/');
+    Uri apiUrl = Uri.parse('http://10.0.1.5:8000/Prenha/');
 
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 

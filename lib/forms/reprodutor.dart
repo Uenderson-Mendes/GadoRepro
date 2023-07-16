@@ -20,7 +20,7 @@ class _AddReproState extends State<AddRepro> {
   late DateTime selectedDate;
 
   Future<void> adicionarReprodutor() async {
-    Uri apiUrl = Uri.parse('http://10.0.0.122:8000/reprodutor/');
+    Uri apiUrl = Uri.parse('http://10.0.1.5:8000/reprodutor/');
 
     // Formate a data de nascimento para o formato esperado pelo Django
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
